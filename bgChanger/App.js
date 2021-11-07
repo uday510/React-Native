@@ -1,18 +1,45 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {
   Text,
   StyleSheet,
   View,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native'
 
 const App = () => {
+  const [randomColor, setRandomColor] = useState("rgb(32, 0, 126)");
 
+  const changeBG = () => {
+    let color = "rgb(" +
+      Math.floor(Math.random() * 256) +
+      "," + 
+      Math.floor(Math.random() * 256) +
+      "," + 
+      Math.floor(Math.random() * 256) +
+      ")";
+
+      setRandomColor(color);
+  }
+  const resetBG  = () => {
+      let color = "rgb(" + 13 + ", " + 13 + ", " + 13 + ")";
+      setRandomColor(color);
+  }
+    
   return(
     <>
-    <View style={[styles.container, {backgroundColor: "rgb(32, 0, 126)" }]}>
+    <StatusBar backgroundColor = {randomColor}/>
+    <View style={[styles.container, {backgroundColor: randomColor }]}>
+    <TouchableOpacity onPress ={changeBG}>
       <Text style={styles.text}>Tap Me</Text>
+      </TouchableOpacity>
+           <Text>
+           {"\n"}
+          </Text>
+      <TouchableOpacity onPress ={resetBG}>
+      <Text style={styles.text}>Reset</Text>
+      </TouchableOpacity>
     </View>
     </>
   );
